@@ -3,8 +3,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morganLogger from 'morgan';
 import cors from 'cors';
-
 import router from './routes';
+require('./database/db');
 
 const app = express();
 
