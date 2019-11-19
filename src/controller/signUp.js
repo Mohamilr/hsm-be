@@ -5,10 +5,10 @@ import { User } from '../models/User';
 
 const SignUp = (req, res) => {
     const { firstName, lastName, email, password } = req.body;
-
+  
     // if body values are empty
     if(!firstName || !lastName || !email || !password) {
-        return jsonResponse.error(res, 'error', 400);
+        return jsonResponse.error(res, 'error', 400, 'Input field cannot be blank');
     }
 
     // if email exists
@@ -25,7 +25,7 @@ const SignUp = (req, res) => {
     });
 
     // hash password
-     bcrypt.hash(password, 10).then(hashPassword => {
+     bcrypt.hash(password.toString(), 10).then(hashPassword => {
         //  create new user
         const user = new User({
             firstname: firstName,
