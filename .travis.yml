@@ -7,11 +7,11 @@ services:
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=
+    - CC_TEST_REPORTER_ID=53b3d40fa94738c4092a474eff90c76a36a74acd6b548bd9f9bbf03d533c42fc
 
 before_script:
   - sleep 15
-  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  - mongo wikipoli_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
