@@ -12,7 +12,7 @@ class Database {
       .connect(DATABASE_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true
-      })
+      }) 
       .then(() => {
         console.log('Database connected');
       })
