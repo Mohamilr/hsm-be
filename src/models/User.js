@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import UniqueValidator from 'mongoose-unique-validator';
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
@@ -12,13 +13,21 @@ const UserSchema = new Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   password: {
     type: String,
     required: true
+  },
+  category: {
+    type: String,
+    default: 'patient',
+    required: true
   }
 });
+
+UserSchema.plugin(UniqueValidator);
 
 const User = mongoose.model('User', UserSchema);
 
