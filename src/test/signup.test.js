@@ -42,10 +42,6 @@ TestSchema.plugin(UniqueValidator);
 
 describe('POST sign up', () => {
     before((done) => {
-        // mongoose.connect('mongodb://localhost/testDatabase', function() {
-        //     mongoose.connection.db.dropDatabase();
-        //     done();
-        // });
         mongoose.connect('mongodb://localhost/testDatabase', { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => {
                 console.log('connected')
@@ -53,24 +49,9 @@ describe('POST sign up', () => {
             .catch(e => {
                 console.log(e);
             })
-        // const database = mongoose.connection;
 
-        done();
-    })
-
-    it('should give error on invalid email', (done) => {
-        chai.request(app)
-            .post('/api/v1/signup')
-        const newUser = new TestUser({
-            firstname: 'mohammed',
-            Lastname: 'ibrahim',
-            email: 'ibrahim@email.com',
-            password: '12345678'
-        })
-        newUser.save();
         done();
     });
-
 
     it('should give error on empty body value', (done) => {
         chai.request(app)
@@ -111,12 +92,39 @@ describe('POST sign up', () => {
             })
             newUser.save();
             done();
-    })
+    });
+
+    // test middleware
+    it('should give error on invalid email', (done) => {
+        chai.request(app)
+            .post('/api/v1/signup')
+        const newUser = new TestUser({
+            firstname: 'mohammed',
+            Lastname: 'ibrahim',
+            email: 'ibrahemail.com',
+            password: '12345678'
+        })
+        newUser.save();
+        done();
+    });
+
+    it('should give if password characters is less than 6', (done) => {
+        chai.request(app)
+        .post('/api/v1/signup')
+        const newUser = new TestUser({
+            firstname: 'mohammed',
+            Lastname: 'ibrahim',
+            email: 'ibrahim@email.com',
+            password: '123'
+        })
+        newUser.save();
+        done();
+    });
 
     after((done) => {
         mongoose.connection.dropDatabase(() => {
             mongoose.connection.close();
             done();
         })
-    })
+    });
 })
