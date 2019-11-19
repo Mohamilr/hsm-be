@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/EphraimDev/hsm-be.svg?branch=staging)](https://travis-ci.org/EphraimDev/hsm-be)  [![Maintainability](https://api.codeclimate.com/v1/badges/90d451d997ebb2f2195f/maintainability)](https://codeclimate.com/github/EphraimDev/hsm-be/maintainability)  [![Test Coverage](https://api.codeclimate.com/v1/badges/90d451d997ebb2f2195f/test_coverage)](https://codeclimate.com/github/EphraimDev/hsm-be/test_coverage)
+
 ## Installing
 
 #### Prerequisites
