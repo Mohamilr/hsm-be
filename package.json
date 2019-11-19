@@ -8,7 +8,7 @@
     "start:dev": "nodemon --exec babel-node src/app.js",
     "build": "babel ./server --out-dir dist",
     "eslint": "./node_modules/.bin/eslint --fix ./server/**/*.js",
-    "test": "cross-env NODE_ENV=test nyc mocha --require @babel/register --timeout 6000 test/index.js --exit"
+    "test": "cross-env NODE_ENV=test nyc mocha --require @babel/register --timeout 6000 ./src/test --exit"
   },
   "repository": {
     "type": "git",
