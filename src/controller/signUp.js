@@ -16,7 +16,7 @@ const SignUp = (req, res) => {
         email
     }).then(email => {
         if(email) {
-            return jsonResponse.error(res, 'error', 400, 'user with email already exist, please sign in')
+            return jsonResponse.error(res, 'error', 400, 'A user with the email already exists, please sign in')
         }
     })
     // catch error
