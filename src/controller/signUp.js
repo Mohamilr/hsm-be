@@ -49,6 +49,9 @@ const SignUp = (req, res) => {
             console.log(e);
         })
      })
+     .catch(e => {
+         console.log(e)
+     })
 }
 
 export default SignUp;
