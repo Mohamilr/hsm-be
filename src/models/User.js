@@ -24,8 +24,69 @@ const UserSchema = new Schema({
     type: String,
     default: 'patient',
     required: true
+  },
+  phone: {
+    type: Number,
+    default: null,
+    required: false
+  },
+  dateofbirth: {
+    type: Date,
+    default: null,
+    required: false
+  },
+  gender: {
+    type: String,
+    default: null,
+    required: false
+  },
+  address: {
+    type: String,
+    default: null,
+    required: false
+  },
+  localgovernment: {
+    type: String,
+    default: null,
+    required: false
+  },
+  state: {
+    type: String,
+    default: null,
+    required: false
+  },
+  country: {
+    type: String,
+    default: null,
+    required: false
+  },
+  bloodgroup: {
+    type: String,
+    default: null,
+    required: false
+  },
+  height: {
+    type: String,
+    default: null,
+    required: false
+  },
+  weight: {
+    type: String,
+    default: null,
+    required: false
+  },
+  genotype: {
+    type: String,
+    default: null,
+    required: false
+  },
+  maritalstatus: {
+    type: String,
+    default: null,
+    required: false
   }
 });
+
 
 UserSchema.plugin(UniqueValidator);
 
