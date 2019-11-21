@@ -8,8 +8,8 @@ chai.should();
 
 describe('User Profile', () => {
     before((done) => {
-        mongoose.connect('mongodb+srv://hms:hms@hms-pypix.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser, useUnifiedTopology}, () => {
-            mongoose.connect.db.dropDatabase();
+        mongoose.connect('mongodb+srv://hms:hms@hms-pypix.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, () => {
+            mongoose.connection.db.dropDatabase();
             done();
         })
         .catch(e => console.log(e));
@@ -23,7 +23,7 @@ describe('User Profile', () => {
        .set('authorization', `bearer token`)
        .send({})
        .end((err, res) => {
-           res.should.have.status(200)
+           res.should.have.status(404)
        })
        done();
     })
@@ -36,7 +36,7 @@ describe('User Profile', () => {
        .set('authorization', `bearer token`)
        .send({})
        .end((err, res) => {
-           res.should.have.status(200)
+           res.should.have.status(404)
        })
        done();
     })
