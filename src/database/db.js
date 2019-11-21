@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 require('dotenv').config();
 const { DATABASE_URL, TEST_DB } = process.env;
+console.log(process.env.NODE_ENV);
 const connectionString =
   process.env.NODE_ENV === 'development' ? DATABASE_URL : TEST_DB;
 class Database {
