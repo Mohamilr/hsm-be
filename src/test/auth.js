@@ -116,24 +116,6 @@ describe('Users Authentication', () => {
       expect(body).to.contain.property('status');
       expect(body.error).to.be.a('string');
     });
-    
-    it('should check for incorrect category input field', async () => {
-      const res = await chai
-        .request(app)
-        .post('/api/v1/auth/signup')
-        .send({
-          firstName: 'asd',
-          lastName: 'asd',
-          category: 'user',
-          email: 'asd@as.com',
-          password: 'asdfgh'
-        });
-      const body = res.body;
-      expect(res.status).to.equal(400);
-      expect(body).to.contain.property('error');
-      expect(body).to.contain.property('status');
-      expect(body.error).to.be.a('string');
-    });
   });
 
   describe('POST /api/v1/auth/login', () => {
@@ -154,7 +136,6 @@ describe('Users Authentication', () => {
           expect(body.status).to.equal('success');
           expect(body.data).to.be.an('object');
           token = body.data.token;
-          console.log(token)
           done();
         });
     });

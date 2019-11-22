@@ -20,10 +20,6 @@ class Auth {
         return jsonResponse.error(res, 'error', 400, 'Last name is required')
       }
 
-      if(category && (category != 'patient' || category != 'doctor' || category != 'admin')) {
-        return jsonResponse.error(res, 'error', 400, 'Wrong category of user selected')
-      }
-
       next();
     }
 }
