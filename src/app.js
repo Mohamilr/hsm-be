@@ -22,6 +22,10 @@ app.get('/', (_req, res) => {
   res.status(200).send('Welcome to HMS API');
 });
 
+app.use((req, res) => {
+  res.status(404).send('incorrect route');
+})
+
 const port = process.env.PORT || 4000;
 
 if (!module.parent) {

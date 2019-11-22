@@ -8,8 +8,6 @@ chai.should();
 
 chai.use(chaiHttp);
 
-let token = null;
-
 describe('Users Authentication', () => {
   before(done => {
     mongoose
@@ -135,7 +133,6 @@ describe('Users Authentication', () => {
           expect(body.data).to.contain.property('token');
           expect(body.status).to.equal('success');
           expect(body.data).to.be.an('object');
-          token = body.data.token;
           done();
         });
     });
@@ -191,6 +188,3 @@ describe('Users Authentication', () => {
     });
   });
 });
-
-
-export default token;
