@@ -1,19 +1,43 @@
-import chai from 'chai';
+import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import mongoose from 'mongoose';
 import app from '../app';
 
 chai.use(chaiHttp);
 chai.should();
 
+let token, id;
+
 describe('User Profile', () => {
-    before((done) => {
-        mongoose.connect('mongodb+srv://hms:hms@hms-pypix.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, () => {
-            mongoose.connection.db.dropDatabase();
+    // before((done) => {
+    //     mongoose.connect('mongodb+srv://hms:hms@hms-pypix.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, () => {
+    //         mongoose.connection.db.dropDatabase();
+    //         done();
+    //     })
+    //     .catch(e => console.log(e));
+    // });
+
+    it('should log in a user', done => {
+        chai
+          .request(app)
+          .post('/api/v1/auth/login')
+          .send({
+            email: 'test@gmail.com',
+            password: 'Password1!'
+          })
+          .then(res => {
+            const body = res.body;
+            expect(res.status).to.equal(200);
+            expect(body).to.contain.property('status');
+            expect(body).to.contain.property('data');
+            expect(body.data).to.contain.property('token');
+            expect(body.status).to.equal('success');
+            expect(body.data).to.be.an('object');
+
+            token = body.data.token;
+            id = body.data.id;
             done();
-        })
-        .catch(e => console.log(e));
-    });
+          });
+      });
 
     it('should give error on wrong token', (done) => {
         const _id = '5dd7cbdd6121092514c71753';
@@ -47,11 +71,11 @@ describe('User Profile', () => {
     })
 
     it('user should update profile', (done) => {
-        const _id = '5dd7cbdd6121092514c71753';
+        const _id = id;
 
        chai.request(app)
        .put(`/api/v1/profile/${_id}`)
-       .set('authorization', `bearer ${process.env.TEST_TOKEN}`)
+       .set('authorization', `bearer ${token}`)
        .send({
         _id,
         category: "category",

@@ -4,7 +4,7 @@ import jsonResponse from '../helper/responseHandler';
 import { User } from '../models/User';
 
 const SignUp = (req, res) => {
-    const { firstName, lastName, email, password, category } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     // if email exists
     User.findOne({
@@ -27,7 +27,6 @@ const SignUp = (req, res) => {
             firstname: firstName,
             lastname: lastName,
             email,
-            category: category ? category :'patient',
             password: hashPassword
         });
         user.save()
