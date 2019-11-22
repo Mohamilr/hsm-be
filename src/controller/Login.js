@@ -25,7 +25,7 @@ const login = (req, res) => {
         {
           userId: user._id
         },
-        'secret',
+        process.env.SECRET_KEY,
         {
           expiresIn: '24h'
         }

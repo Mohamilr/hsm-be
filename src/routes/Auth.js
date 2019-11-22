@@ -1,6 +1,6 @@
 import express from 'express';
 import login from '../controller/Login';
-import signUp from '../controller/signUp';
+import signUp from '../controller/SignUp';
 import middleware from '../middleware/auth';
 const router = express.Router();
 
