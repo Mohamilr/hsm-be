@@ -4,7 +4,7 @@ class Auth {
     static signUp (req, res, next)  {
       const { email, password, firstName, lastName, category } = req.body;
 
-      if (!(/[\w]+@[a-zA-Z]+\.com$/.test(email))) {
+      if (!(/[\w]+@[a-zA-Z]+\.[a-zA-Z]{2}/.test(email))) {
          return jsonResponse.error(res, 'error', 400, 'Incorrect email format')
       }
 
