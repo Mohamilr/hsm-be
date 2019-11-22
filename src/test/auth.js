@@ -43,63 +43,97 @@ describe('Users Authentication', () => {
       expect(body.data).to.contain.property('user');
       expect(body.status).to.equal('success');
       expect(body.data).to.be.an('object');
+    });    
+
+    it('should add a user', async () => {
+      const res = await chai
+        .request(app)
+        .post('/api/v1/auth/signup')
+        .send({
+          email: 'test2@gmail.com',
+          firstName: 'test',
+          lastName: 'tester',
+          password: 'Password1!'
+        });
+      const { body } = res;
+      expect(res.status).to.equal(201);
+      expect(body).to.contain.property('status');
+      expect(body).to.contain.property('data');
+      expect(body.data).to.contain.property('user');
+      expect(body.status).to.equal('success');
+      expect(body.data).to.be.an('object');
     });
-  });
 
-  it('should add a user', async () => {
-    const res = await chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        email: 'test2@gmail.com',
-        firstName: 'test',
-        lastName: 'tester',
-        password: 'Password1!'
-      });
-    const { body } = res;
-    expect(res.status).to.equal(201);
-    expect(body).to.contain.property('status');
-    expect(body).to.contain.property('data');
-    expect(body.data).to.contain.property('user');
-    expect(body.status).to.equal('success');
-    expect(body.data).to.be.an('object');
-  });
+    it('should check if user exists', async () => {
+      const res = await chai
+        .request(app)
+        .post('/api/v1/auth/signup')
+        .send({
+          email: 'test2@gmail.com',
+          firstName: 'test',
+          lastName: 'tester',
+          password: 'Password1!'
+        });
+      const body = res.body;
+      expect(res.status).to.equal(400);
+      expect(body).to.contain.property('status');
+      expect(body).to.contain.property('error');
+      expect(body.status).to.equal('error');
+      expect(body.error).to.be.a('string');
+      expect(body.error).to.equal(
+        'A user with the email already exists, please sign in'
+      );
+    });
 
-  it('should check if user exists', async () => {
-    const res = await chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        email: 'test2@gmail.com',
-        firstName: 'test',
-        lastName: 'tester',
-        password: 'Password1!'
-      });
-    const body = res.body;
-    expect(res.status).to.equal(400);
-    expect(body).to.contain.property('status');
-    expect(body).to.contain.property('error');
-    expect(body.status).to.equal('error');
-    expect(body.error).to.be.a('string');
-    expect(body.error).to.equal(
-      'A user with the email already exists, please sign in'
-    );
-  });
-  it('should check for input field', async () => {
-    const res = await chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-      });
-    const body = res.body;
-    expect(res.status).to.equal(400);
-    expect(body).to.contain.property('error');
-    expect(body).to.contain.property('status');
-    expect(body.error).to.be.a('string');
+    it('should check for missing first name input field', async () => {
+      const res = await chai
+        .request(app)
+        .post('/api/v1/auth/signup')
+        .send({
+          lastName: 'asd',
+          email: 'asd@as.com',
+          password: 'asdfgh'
+        });
+      const body = res.body;
+      expect(res.status).to.equal(400);
+      expect(body).to.contain.property('error');
+      expect(body).to.contain.property('status');
+      expect(body.error).to.be.a('string');
+    });
+    
+    it('should check for missing last name input field', async () => {
+      const res = await chai
+        .request(app)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'asd',
+          email: 'asd@as.com',
+          password: 'asdfgh'
+        });
+      const body = res.body;
+      expect(res.status).to.equal(400);
+      expect(body).to.contain.property('error');
+      expect(body).to.contain.property('status');
+      expect(body.error).to.be.a('string');
+    });
+    
+    it('should check for incorrect category input field', async () => {
+      const res = await chai
+        .request(app)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'asd',
+          lastName: 'asd',
+          category: 'user',
+          email: 'asd@as.com',
+          password: 'asdfgh'
+        });
+      const body = res.body;
+      expect(res.status).to.equal(400);
+      expect(body).to.contain.property('error');
+      expect(body).to.contain.property('status');
+      expect(body.error).to.be.a('string');
+    });
   });
 
   describe('POST /api/v1/auth/login', () => {

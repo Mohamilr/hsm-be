@@ -22,6 +22,7 @@ const UserSchema = new Schema({
   },
   category: {
     type: String,
+    enum: ['patient', 'doctor', 'admin'],
     default: 'patient',
     required: true
   },
