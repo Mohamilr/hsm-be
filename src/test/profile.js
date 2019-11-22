@@ -28,6 +28,7 @@ describe('User Profile', () => {
 
             token = body.data.token;
             id = body.data.id;
+            console.log(body.data)
             done();
           });
       });
@@ -65,7 +66,7 @@ describe('User Profile', () => {
 
     it('user should update profile', (done) => {
         const _id = id;
-
+      console.log(_id, token)
        chai.request(app)
        .put(`/api/v1/profile/${_id}`)
        .set('authorization', `bearer ${token}`)
