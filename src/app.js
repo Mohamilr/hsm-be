@@ -24,7 +24,7 @@ app.get('/', (_req, res) => {
 
 app.use((req, res) => {
   res.status(404).send('incorrect route');
-})
+});
 
 const port = process.env.PORT || 4000;
 

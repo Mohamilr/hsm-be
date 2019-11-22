@@ -8,8 +8,6 @@ chai.should();
 
 chai.use(chaiHttp);
 
-// let token;
-
 describe('Users Authentication', () => {
   before(done => {
     mongoose
@@ -43,7 +41,7 @@ describe('Users Authentication', () => {
       expect(body.data).to.contain.property('user');
       expect(body.status).to.equal('success');
       expect(body.data).to.be.an('object');
-    });    
+    });
 
     it('should add a user', async () => {
       const res = await chai
@@ -100,7 +98,7 @@ describe('Users Authentication', () => {
       expect(body).to.contain.property('status');
       expect(body.error).to.be.a('string');
     });
-    
+
     it('should check for missing last name input field', async () => {
       const res = await chai
         .request(app)
@@ -116,7 +114,7 @@ describe('Users Authentication', () => {
       expect(body).to.contain.property('status');
       expect(body.error).to.be.a('string');
     });
-    
+
     it('should check for incorrect category input field', async () => {
       const res = await chai
         .request(app)
@@ -137,27 +135,24 @@ describe('Users Authentication', () => {
   });
 
   describe('POST /api/v1/auth/login', () => {
-    it('should log in a user', done => {
-      chai
+    it('should log in a user', async () => {
+      const res = await chai
         .request(app)
         .post('/api/v1/auth/login')
         .send({
-          email: 'test@gmail.com',
+          email: 'test2@gmail.com',
           password: 'Password1!'
-        })
-        .then(res => {
-          const body = res.body;
-          expect(res.status).to.equal(200);
-          expect(body).to.contain.property('status');
-          expect(body).to.contain.property('data');
-          expect(body.data).to.contain.property('token');
-          expect(body.status).to.equal('success');
-          expect(body.data).to.be.an('object');
-          done();
         });
+      const body = res.body;
+      expect(res.status).to.equal(200);
+      expect(body).to.contain.property('status');
+      expect(body).to.contain.property('data');
+      expect(body.data).to.contain.property('token');
+      expect(body.status).to.equal('success');
+      expect(body.data).to.be.an('object');
     });
 
-    it('should check if user does not exists', async () => {
+    it('should check if user does not exist', async () => {
       const res = await chai
         .request(app)
         .post('/api/v1/auth/login')
@@ -191,7 +186,7 @@ describe('Users Authentication', () => {
       expect(body.error).to.equal('Invalid Credentials');
     });
 
-    it('should for return error for incomplete body request', async () => {
+    it('should return error for incomplete body request', async () => {
       const res = await chai
         .request(app)
         .post('/api/v1/auth/login')
