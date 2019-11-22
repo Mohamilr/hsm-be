@@ -5,7 +5,7 @@ import app from '../app';
 chai.use(chaiHttp);
 chai.should();
 
-let token, id;
+let token, _id;
 
 describe('User Profile', () => {
 
@@ -27,8 +27,7 @@ describe('User Profile', () => {
             expect(body.data).to.be.an('object');
 
             token = body.data.token;
-            id = body.data.id;
-            console.log(body.data)
+            _id = body.data.id;
             done();
           });
       });
@@ -65,7 +64,6 @@ describe('User Profile', () => {
     })
 
     it('user should update profile', (done) => {
-        const _id = id;
       console.log(_id, token)
        chai.request(app)
        .put(`/api/v1/profile/${_id}`)
