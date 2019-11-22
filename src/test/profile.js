@@ -27,7 +27,7 @@ describe('User Profile', () => {
             expect(body.data).to.be.an('object');
 
             token = body.data.token;
-            _id = body.data.id;
+            _id = body.data.user.id;
             done();
           });
       });
