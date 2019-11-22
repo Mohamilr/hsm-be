@@ -11,7 +11,7 @@ const verify = async (req, res, next) => {
     const token = bearer[1];
 
     const decoded = await jwt.verify(token, process.env.SECRET_KEY);
-
+    console.log(decoded, req.params.userId)
     if(req.params.id != decoded.userId){
         jsonResponse.error(res, 'error', 401 , 'unauthorized')
     }

@@ -8,13 +8,6 @@ chai.should();
 let token, id;
 
 describe('User Profile', () => {
-    // before((done) => {
-    //     mongoose.connect('mongodb+srv://hms:hms@hms-pypix.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, () => {
-    //         mongoose.connection.db.dropDatabase();
-    //         done();
-    //     })
-    //     .catch(e => console.log(e));
-    // });
 
     it('should log in a user', done => {
         chai
