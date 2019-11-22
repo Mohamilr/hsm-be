@@ -1,6 +1,6 @@
 import express from 'express';
-import verify from '../middleware/verify';
 import profile from '../controller/Profile';
+import verify from '../controller/Verify';
 
 const router = express.Router();
 

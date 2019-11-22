@@ -10,7 +10,6 @@ class Database {
   }
 
   _connect() {
-    console.log(connectionString)
     mongoose
       .connect(connectionString, {
         useNewUrlParser: true,
