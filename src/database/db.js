@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 require('dotenv').config();
 const { DATABASE_URL, TEST_DB } = process.env;
-console.log(process.env.TEST_DB);
+
 const connectionString =
   process.env.NODE_ENV === 'development' ? DATABASE_URL : TEST_DB;
 class Database {
@@ -10,7 +10,6 @@ class Database {
   }
 
   _connect() {
-    console.log(connectionString)
     mongoose
       .connect(connectionString, {
         useNewUrlParser: true,
